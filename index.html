@@ -8,7 +8,14 @@
     <style>
         div#container {
             display: flex;
-            flex: row wrap;
+            flex-direction: column;
+        }
+
+        .row {
+            display: flex;
+            flex: 1 auto;
+            border: solid;
+            height: 40px;
         }
 
         .square {
@@ -26,12 +33,30 @@
 </body>
 <script>
     const container = document.querySelector("#container");
+
+    // row loop
+    for (let index = 0; index < 16; index++) {
+        const row = document.createElement("div");
+        row.setAttribute("class", "row");
+        container.appendChild(row);
+
+        // column loop
+        for (let index = 0; index < 16; index++) {
+            const square = document.createElement("div");
+            square.setAttribute("class", "square");
+            row.appendChild(square);
+        }
+        
+    }
+
+    /*
+ 
     for (let index = 0; index < 3; index++) {
         const square = document.createElement("div");
         square.setAttribute("class", "square");
         container.appendChild(square);
     }
-
+    */
 </script>
 
 </html>
