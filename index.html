@@ -35,9 +35,11 @@
             aspect-ratio: 1 / 1;
         }
 
+        /*  
         .square:hover {
             background-color: red;
         }
+        */
 
         button {
             width: 200px;
@@ -76,23 +78,15 @@
         let numberOfSquares = 16;
 
         if (squares != null) {
-
             squares = Number(squares);
-
             console.log(typeof squares);
-
             if (squares > 100) {
                 alert('Max limit is 100');
-
             }
             else {
-
                 numberOfSquares = squares;
                 console.log(`There will be ${numberOfSquares} of squares`);
-
             }
-
-
         }
 
         // row loop
@@ -106,9 +100,16 @@
                 const square = document.createElement("div");
                 square.setAttribute("class", "square");
                 row.appendChild(square);
+                square.addEventListener("mouseover", () => {
+                    square.style.backgroundColor = `rgb(${Math. floor(Math. random() * 256)}, ${Math. floor(Math. random() * 256)}, ${Math. floor(Math. random() * 256)})`;
+                });
+                square.addEventListener("mouseout", () => {
+                    square.style.backgroundColor = "";
+                });
             }
 
         }
+
 
     }
 
