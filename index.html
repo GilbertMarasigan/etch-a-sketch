@@ -25,7 +25,7 @@
         .row {
             display: flex;
             flex: 1 auto;
-            border: solid;
+            border: 1px solid;
             /* height: 40px; */
         }
 
@@ -97,15 +97,30 @@
 
             // column loop
             for (let index = 0; index < numberOfSquares; index++) {
+
                 const square = document.createElement("div");
                 square.setAttribute("class", "square");
                 row.appendChild(square);
+
+                let hoverOpacity = .1;
+
+                // on mouse over highlight the square with any random rgb color
                 square.addEventListener("mouseover", () => {
-                    square.style.backgroundColor = `rgb(${Math. floor(Math. random() * 256)}, ${Math. floor(Math. random() * 256)}, ${Math. floor(Math. random() * 256)})`;
+
+                    //set opacity 10% each hover until it reaches 100
+                    if (hoverOpacity < 1) {
+                        hoverOpacity += .1;
+                    }
+
+                    square.style.opacity = hoverOpacity;
+                    square.style.backgroundColor = `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`;
                 });
+
+                // remove highlight when hover is removed
                 square.addEventListener("mouseout", () => {
                     square.style.backgroundColor = "";
                 });
+
             }
 
         }
