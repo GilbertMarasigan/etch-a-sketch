@@ -6,16 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Etch-A-Sketch</title>
     <style>
+        div#control {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 25px;
+            margin-top: 25px;
+        }
+
         div#container {
             display: flex;
             flex-direction: column;
+            margin: auto;
+            width: 700px;
+            height: 700px;
         }
 
         .row {
             display: flex;
             flex: 1 auto;
             border: solid;
-            height: 40px;
+            /* height: 40px; */
         }
 
         .square {
@@ -23,40 +34,92 @@
             border: solid;
             aspect-ratio: 1 / 1;
         }
+
+        .square:hover {
+            background-color: red;
+        }
+
+        button {
+            width: 200px;
+            justify-content: center;
+        }
     </style>
 </head>
 
 <body>
+    <div id="control">
+
+    </div>
     <div id="container">
 
     </div>
 </body>
 <script>
+
     const container = document.querySelector("#container");
+    const control = document.querySelector("#control");
 
-    // row loop
-    for (let index = 0; index < 16; index++) {
-        const row = document.createElement("div");
-        row.setAttribute("class", "row");
-        container.appendChild(row);
+    const gridButton = document.createElement("button");
+    gridButton.textContent = "Change Grid";
+    control.appendChild(gridButton);
 
-        // column loop
-        for (let index = 0; index < 16; index++) {
-            const square = document.createElement("div");
-            square.setAttribute("class", "square");
-            row.appendChild(square);
+    function removeAllChildNodes(parent) {
+        while (parent.firstChild) {
+            parent.removeChild(parent.firstChild);
         }
-        
     }
 
-    /*
- 
-    for (let index = 0; index < 3; index++) {
-        const square = document.createElement("div");
-        square.setAttribute("class", "square");
-        container.appendChild(square);
+    function addSquares(squares) {
+
+        removeAllChildNodes(container);
+
+        let numberOfSquares = 16;
+
+        if (squares != null) {
+
+            squares = Number(squares);
+
+            console.log(typeof squares);
+
+            if (squares > 100) {
+                alert('Max limit is 100');
+
+            }
+            else {
+
+                numberOfSquares = squares;
+                console.log(`There will be ${numberOfSquares} of squares`);
+
+            }
+
+
+        }
+
+        // row loop
+        for (let index = 0; index < numberOfSquares; index++) {
+            const row = document.createElement("div");
+            row.setAttribute("class", "row");
+            container.appendChild(row);
+
+            // column loop
+            for (let index = 0; index < numberOfSquares; index++) {
+                const square = document.createElement("div");
+                square.setAttribute("class", "square");
+                row.appendChild(square);
+            }
+
+        }
+
     }
-    */
+
+    addSquares();
+
+    gridButton.addEventListener("click", () => {
+        let userDefinedNoOfSquare = prompt("Enter number of squares per side for the new grid");
+        addSquares(userDefinedNoOfSquare);
+    });
+
+
 </script>
 
 </html>
